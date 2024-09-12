@@ -1,6 +1,8 @@
 package com.codedotorg;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -101,7 +103,13 @@ public class PixelPedia {
      * Sorts the games in the 'games' list based on their titles.
      */
     public void sortGames() {
-        
+        Collections.sort(games, new Comparator<Game>() {
+        @Override
+        public int compare(Game g1, Game g2) {
+            return g1.getTitle().compareToIgnoreCase(g2.getTitle());
+        }
+    });
+    
         
     }
 
@@ -112,7 +120,7 @@ public class PixelPedia {
      */
     public void refreshList() {
         listView.getItems().clear();
-
+        sortGames();
         for (Game game : games) {
             listView.getItems().add(game.getTitle());
         }
